@@ -1,1 +1,59 @@
-<p>usuario-registro works!</p>
+<div class="container">
+    <div class="content">
+        <div class="form">
+            <h1>Registrarse</h1>
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <mat-form-field appearance="fill" style="width: 85%;">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" placeholder="Email" autocomplete="off" required [formControl]="correo">
+                        <mat-icon matSuffix>alternate_email</mat-icon>                            
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="fill" style="width: 85%;">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password">
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="fill" style="width: 85%;">
+                        <mat-label>Username</mat-label>
+                        <input matInput type="text" placeholder="Username" autocomplete="off" required [formControl]="username">
+                        <mat-icon matSuffix>face</mat-icon>                            
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="fill" style="width: 85%;">
+                        <mat-label>Teléfono</mat-label>
+                        <input matInput type="number" placeholder="Télefono" autocomplete="off" required [formControl]="telefono">
+                        <mat-icon matSuffix>phone</mat-icon>                            
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha Nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" [formControl]="fecha">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-success" type="submit">Registrarse</button>
+                    </div>
+                    <div class="col">
+                        <a type="button" href="/usuario/login">Tienes cuenta? ingresa ahora</a>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>

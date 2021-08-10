@@ -1,0 +1,108 @@
+<app-navbar></app-navbar>
+
+<div class="container" style="padding: 40px;">
+    <h1>Registrar nuevo producto</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="form-group">
+           <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="prices">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text" matInput placeholder="Nombre del producto" autocomplete="off" required [formControl]="nombre">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="fill" class="prices">
+                        <mat-label>Stock</mat-label>
+                        <input type="number" matInput placeholder="Stock del producto" autocomplete="off" required [formControl]="stock">
+                    </mat-form-field>
+                </div>
+           </div>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-chip-list" appearance="fill">
+                <mat-label>Caractersiticas del producto</mat-label>
+                <mat-chip-list #chipList aria-label="Caractersiticas del producto">
+                  <mat-chip *ngFor="let c of caracteristicas" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(c)">
+                    {{c.nombre}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Agregar una caracteristica.."
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+              </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm">
+                    <mat-form-field class="prices" appearance="fill">
+                        <mat-label>Precio Inicio $</mat-label>
+                        <input type="number" matInput placeholder="Precio inicial del producto" (keyup)="calcularTotal()" autocomplete="off" required [formControl]="precio_inicial">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field class="prices" appearance="fill">
+                        <mat-label>Descuento %</mat-label>
+                        <input type="number" matInput placeholder="Porcentaje Descuento" (keyup)="calcularTotal()" autocomplete="off" required [formControl]="porcentaje_descuento">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <mat-form-field class="prices" appearance="fill">
+                        <mat-label>Valor descuento $</mat-label>
+                        <input type="number" matInput autocomplete="off" [attr.disabled]="true" [formControl]="valor_descuento">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field class="prices" appearance="fill">
+                        <mat-label>Precio Final $</mat-label>
+                        <input type="number" matInput autocomplete="off" [attr.disabled]="true" [formControl]="precio_final">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div >
+            <mat-form-field appearance="fill" class="prices">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput placeholder="Descripción del producto" autocomplete="off" required [formControl]="descripcion"></textarea>
+            </mat-form-field>
+         </div>
+        <div class="form-group">
+            <mat-label>Seleccionar Imagenes</mat-label>
+            <input type="file" #myInput multiple (change)="seleccionarImagenes($event)">
+              
+        </div>
+
+
+        <div class="form-group" *ngIf="imageFile.length > 0">
+            <mat-form-field class="example-chip-list" appearance="fill">
+                <mat-label>Imagenes cargadas</mat-label>
+                <mat-chip-list #chipLists aria-label="Caractersiticas del producto">
+                  <mat-chip *ngFor="let selected of nameFile;let index = index" [selectable]="selectable"
+                           [removable]="removable" (removed)="eliminarImage(index)">
+                    {{selected}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                         [matChipInputFor]="chipLists"
+                         [matChipInputAddOnBlur]="addOnBlur">
+                </mat-chip-list>
+              </mat-form-field>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col">
+                <button class="btn btn-success" type="submit">Registrar</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-danger" type="button" (click)="cancelar(form)" >Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,1 +1,36 @@
-<p>usuario-login works!</p>
+<div class="container">
+    
+    <div class="content">
+        <div class="form">
+            <h1>Iniciar Sesión</h1>
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <mat-form-field appearance="fill" style="width: 80%;">
+                        <mat-label>Correo</mat-label>
+                        <input type="email" placeholder="Correo" matInput [formControl]="email" required/>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="fill" style="width: 80%;">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password">
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-success" type="submit">Ingresar</button>
+                    </div>
+                    <div class="col">
+                        <a type="button" href="/usuario/registro">Registrarse ahora</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>
