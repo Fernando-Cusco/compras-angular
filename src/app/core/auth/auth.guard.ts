@@ -9,19 +9,29 @@ import { Token } from '../models/token.model';
 })
 export class AuthGuard implements CanActivate {
 
-  private token: Token;
+  
   constructor(private usuarioService: UsuarioService, private router: Router) {
-    this.token = usuarioService.decodeToken();
+    
     
   }
 
   canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.token != null) {
-      const expiracion: Date = new Date(this.token.exp*1000);
+    const token = this.usuarioService.decodeToken();
+    if (token != null) {
+      const expiracion: Date = new Date(token.exp*1000);
       const today: Date = new Date();
-      return (expiracion >= today)? true: false;
+      for (let i = 0; i < token.authorities.length; i ++) {
+        if (route.data.roles.includes(token.authorities[i])) {
+          return (expiracion >= today)? true: false;
+        } else {
+          this.router.navigate(['/forebbiden']);
+          return false;
+        }
+      }
     }
-    this.router.navigate(['/usuario']);
+    this.router.navigate(['/usuario']).then(() => {
+      window.location.reload();
+    })
     return false;
   }
   

@@ -1,0 +1,6 @@
+export const enum Role {
+    ROLE_ADMIN = 'ROLE_ADMIN',
+    ROLE_USER_READ = 'ROLE_USER_READ',
+    ROLE_USER_WRITE = 'ROLE_USER_WRITE',
+    ROLE_USER_DETELE = 'ROLE_USER_DETELE',
+}

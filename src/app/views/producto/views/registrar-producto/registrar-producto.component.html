@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div class="container" style="padding: 40px;">
+<div class="container" style="padding: 40px;" appRole='["ROLE_ADMIN", "ROLE_USER_WRITE"]'>
     <h1>Registrar nuevo producto</h1>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(form)" #form="ngForm">
         <div class="form-group">

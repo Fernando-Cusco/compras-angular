@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 
+
 @NgModule({
   declarations: [RegistrarProductoComponent, MostrarProductoComponent],
   imports: [
@@ -33,6 +34,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatIconModule,
     MatButtonModule,
     MatSelectModule
-  ]
+  ],
+  exports: []
 })
 export class ProductoModule { }

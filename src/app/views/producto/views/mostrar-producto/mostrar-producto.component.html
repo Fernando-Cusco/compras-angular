@@ -1,6 +1,11 @@
 <app-navbar></app-navbar>
 
-<div class="container">
+<div class="container" *ngIf="productos.length == 0 || productos == null">
+  <h1>No hay productos registrados</h1>
+  <a class="btn btn-danger" routerLink="/producto/registrar">Registra uno ahora mismo.</a>
+</div>
+
+<div class="container" *ngIf="productos.length > 0 && productos != null">
     <mat-card class="example-card" *ngFor="let producto of productos">
         <mat-card-header>
           <mat-card-title>{{ producto.nombre }}</mat-card-title>
