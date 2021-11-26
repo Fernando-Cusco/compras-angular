@@ -13,9 +13,11 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UsuarioPerfilComponent } from './views/usuario-perfil/usuario-perfil.component';
+import { CoreComponentsModule } from 'src/app/core/components/core-components.module';
 
 @NgModule({
-  declarations: [UsuarioRegistroComponent, UsuarioLoginComponent],
+  declarations: [UsuarioRegistroComponent, UsuarioLoginComponent, UsuarioPerfilComponent],
   imports: [
     CommonModule,
     UsuarioRoutingModule,
@@ -27,8 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
-
+    MatNativeDateModule,
+    CoreComponentsModule
   ]
 })
 export class UsuarioModule { }
