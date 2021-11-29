@@ -1,7 +1,50 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-    <div class="contenido">
-        
+    <div class="perfil">
+
+        <div class="encabezado">
+            <h2>Información básica</h2>
+            <div class="descripcion">
+                Bienvenido {{ usernameField.value }}, aqui puedes cambiar la información
+                de tu usuario.
+            </div>
+        </div>
+        <div class="contenido">
+            <form [formGroup]="formGroup" (ngSubmit)="subtmit()">
+                <div class="inputs">
+                    <label for="correo">Correo:</label>
+                    <input id="correo" type="text" formControlName="correo">
+                    <div class="errors" *ngIf="correoField.touched && correoField.invalid">
+                        <span class="message-error" *ngIf="correoField.hasError('required')">El correo es requerido</span>
+                        <span class="message-error" *ngIf="correoField.hasError('email')">El correo no es correcto</span>
+                    </div>
+                </div>
+                <div class="inputs">
+                    <label for="fecha">Fecha Nacimiento:</label>
+                    <input id="fecha" type="date" formControlName="fechaNacimiento">
+                    <div class="errors" *ngIf="fechaNacimientoField.touched && fechaNacimientoField.invalid">
+                        <span class="message-error" *ngIf="fechaNacimientoField.hasError('required')">La fecha de nacimiento es requerido</span>
+                    </div>
+                </div>
+                <div class="inputs">
+                    <label for="username">Username:</label>
+                    <input id="username" type="text" formControlName="username">
+                    <div class="errors" *ngIf="usernameField.touched && usernameField.invalid">
+                        <span class="message-error" *ngIf="usernameField.hasError('required')">El nombre de usuario es requerido</span>
+                    </div>
+                </div>
+                <div class="inputs">
+                    <label for="telefono">Teléfono:</label>
+                    <input id="telefono" type="text" formControlName="telefono">
+                    <div class="errors" *ngIf="telefonoField.touched && telefonoField.invalid">
+                        <span class="message-error" *ngIf="telefonoField.hasError('required')">El teléfono es requerido</span>
+                    </div>
+                </div>
+                <div class="button">
+                    <input class="btn-update" type="submit" value="Actualizar">
+                </div>
+            </form>
+        </div>
     </div>
 </div>

@@ -13,11 +13,28 @@ import { Token } from '../../../core/models/token.model';
 })
 export class UsuarioService {
 
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private httpHeadersToken = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept': 'application/json','Authorization': localStorage.getItem('token') });
   private url = `${environment.api}/usuario`;
 
   constructor(private http: HttpClient) { }
 
+  actualizarPerfil(usuario: Usuario): Observable<Response> {
+    return this.http.put<Response>(`${this.url}/actualizar`, usuario, {headers: this.httpHeadersToken}).pipe(
+      tap((response: Response) => {
+
+      }),
+      catchError(this.handleError<Response>('Error actualizar'))
+    )
+  }
+
+  perfil(correo: string): Observable<Response> {
+    return this.http.get<Response>(`${this.url}/${correo}`, {headers: this.httpHeadersToken}).pipe(
+      tap((response: Response) => {
+      }),
+      catchError(this.handleError<Response>('Error perfil'))
+    )
+  }
 
   registro(usuario: Usuario):Observable<Usuario> {
     return this.http.post<Usuario>(this.url, usuario, {headers: this.httpHeaders}).pipe(
